@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: always
+spring:
+  application:
+    name: /phonebook-app-backend
+  main:
+    banner-mode: off
+  datasource:
+    url: ${MYSQLDB_URL}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    change-log: db/changelog-master.yml
+
+management:
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:8081}
+  endpoints:
+    web:
+      exposure:
+        include: info, health
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    metrics:
+      enabled: false
+    info:
+      enabled: true
